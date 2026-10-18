@@ -1,8 +1,9 @@
-import { appendFile } from 'node:fs/promises';
 import got from 'got';
 import { TSVOfferGenerator } from '../../shared/libs/offer-generator/tsv-offer-generator.js';
 import { MockServerData } from '../../shared/types/mock-server-data.type.js';
 import { Command } from './command.interface.js';
+import { TSVFileWriter } from '../../shared/libs/file-writer/tsv-file-writer.js';
+import { getErrorMessage } from '../../shared/helpers/index.js';
 
 
 export class GenerateCommand implements Command {
@@ -22,11 +23,9 @@ export class GenerateCommand implements Command {
 
   private async write(filePath: string, offerCount: number) {
     const tsvOfferGenerator = new TSVOfferGenerator(this.initialData);
-
+    const tsvFileWriter = new TSVFileWriter(filePath);
     for (let i = 0; i < offerCount; i++) {
-      await appendFile(filePath,
-        `${tsvOfferGenerator.generate()}\n`,
-        { encoding: 'utf8' });
+      await tsvFileWriter.write(tsvOfferGenerator.generate());
     }
   }
 
@@ -54,14 +53,9 @@ export class GenerateCommand implements Command {
       console.info(`Файл ${filePath} успешно создан с ${offerCount} предложениями`);
     } catch (error: unknown) {
       console.error(
-        'Не удалось загрузить данные с URL'
+        'Не удалось сгенерировать данные'
       );
-
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+      console.error(getErrorMessage(error));
     }
   }
 }
-
-
