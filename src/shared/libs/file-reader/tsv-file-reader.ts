@@ -1,89 +1,36 @@
-import { readFileSync } from 'node:fs';
-import { Amenity, CityName, HousingType, Offer, UserType } from '../../types/index.js';
+import EventEmitter from 'node:events';
+import {createReadStream} from 'node:fs';
 import { FileReader } from './index.js';
 
+const CHUNK_SIZE = 16384;
 
-export class TSVFileReader implements FileReader {
-  private rawData = '';
-
-  constructor(private readonly filePath: string) {}
-
-  public read(): void {
-    this.rawData = readFileSync(this.filePath, { encoding: 'utf-8' });
+export class TSVFileReader extends EventEmitter implements FileReader {
+  constructor(private readonly filePath: string) {
+    super();
   }
 
-  private parseLine(line: string): Offer {
-    const [
-      title,
-      description,
-      postDate,
-      cityName,
-      previewImage,
-      images,
-      isPremium,
-      isFavorite,
-      rating,
-      housingType,
-      roomsCount,
-      guestsCount,
-      price,
-      amenities,
-      authorName,
-      authorEmail,
-      authorAvatar,
-      authorPassword,
-      authorType,
-      latitude,
-      longitude
-    ] = line.split('\t');
+  public async read(): Promise<void> {
+    const readStream = createReadStream(this.filePath, {
+      highWaterMark: CHUNK_SIZE,
+      encoding: 'utf8'
+    });
 
-    const location = {
-      latitude: Number(latitude),
-      longitude: Number(longitude)
-    };
+    let remainingData = '';
+    let nextLinePosition = -1;
+    let importedRowCount = 0;
 
-    return {
-      title,
-      description,
-      postDate: new Date(postDate),
+    for await (const chunk of readStream) {
+      remainingData += chunk.toString();
 
-      city: {
-        name: cityName as CityName,
-        location
-      },
+      while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
+        const completedRow = remainingData.slice(0, nextLinePosition + 1);
+        remainingData = remainingData.slice(++nextLinePosition);
+        importedRowCount++;
 
-      previewImage,
-      images: images.split(';'),
-      isPremium: isPremium === 'true',
-      isFavorite: isFavorite === 'true',
-      rating: Number(rating),
-      housingType: housingType as HousingType,
-      roomsCount: Number(roomsCount),
-      guestsCount: Number(guestsCount),
-      price: Number(price),
-      amenities: amenities.split(';') as Amenity[],
-
-      author: {
-        name: authorName,
-        email: authorEmail,
-        avatar: authorAvatar,
-        password: authorPassword,
-        type: authorType as UserType
-      },
-
-      commentCount: 0,
-      location
-    };
-  }
-
-  public toArray(): Offer[] {
-    if (!this.rawData) {
-      throw new Error('File is not read');
+        this.emit('line', completedRow);
+      }
     }
 
-    return this.rawData
-      .split('\n')
-      .filter((row) => row.trim().length > 0)
-      .map((line) => this.parseLine(line));
+    this.emit('end', importedRowCount);
   }
 }
