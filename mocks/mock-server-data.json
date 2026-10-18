@@ -1,0 +1,147 @@
+{
+  "api": {
+    "titles": [
+      "Уютная квартира рядом с Эйфелевой башней",
+      "Просторный дом в историческом центре",
+      "Светлый номер с видом на город",
+      "Современные апартаменты у канала",
+      "Тихая студия для деловой поездки",
+      "Семейный отель рядом с зелёным парком",
+      "Стильный лофт с террасой в центре",
+      "Комфортная комната в старинном доме"
+    ],
+    "descriptions": [
+      "Светлая квартира с просторной гостиной, удобной кухней и красивым видом на исторический центр.",
+      "Тихий дом для семейного отдыха с уютной террасой, садом и полностью оборудованной кухней.",
+      "Современные апартаменты рядом с основными достопримечательностями и остановками общественного транспорта.",
+      "Комфортный номер с рабочей зоной, быстрым интернетом и всем необходимым для продолжительного проживания.",
+      "Просторное жильё в спокойном районе города, подходящее для большой компании или семейной поездки.",
+      "Уютная студия после ремонта с новой мебелью, бытовой техникой и удобным расположением в центре.",
+      "Стильный лофт с панорамными окнами, отдельной спальней и большой террасой для вечернего отдыха.",
+      "Небольшая комната в гостеприимном доме рядом с кафе, магазинами и популярными городскими маршрутами."
+    ],
+    "cities": [
+      {
+        "name": "Paris",
+        "location": {
+          "latitude": 48.85661,
+          "longitude": 2.351499
+        }
+      },
+      {
+        "name": "Cologne",
+        "location": {
+          "latitude": 50.938361,
+          "longitude": 6.959974
+        }
+      },
+      {
+        "name": "Brussels",
+        "location": {
+          "latitude": 50.846557,
+          "longitude": 4.351697
+        }
+      },
+      {
+        "name": "Amsterdam",
+        "location": {
+          "latitude": 52.370216,
+          "longitude": 4.895168
+        }
+      },
+      {
+        "name": "Hamburg",
+        "location": {
+          "latitude": 53.550341,
+          "longitude": 10.000654
+        }
+      },
+      {
+        "name": "Dusseldorf",
+        "location": {
+          "latitude": 51.225402,
+          "longitude": 6.776314
+        }
+      }
+    ],
+    "previewImages": [
+      "https://example.com/images/preview-paris.jpg",
+      "https://example.com/images/preview-cologne.jpg",
+      "https://example.com/images/preview-brussels.jpg",
+      "https://example.com/images/preview-amsterdam.jpg",
+      "https://example.com/images/preview-hamburg.jpg",
+      "https://example.com/images/preview-dusseldorf.jpg",
+      "https://example.com/images/preview-loft.jpg",
+      "https://example.com/images/preview-room.jpg"
+    ],
+    "images": [
+      "https://example.com/images/room-1.jpg",
+      "https://example.com/images/room-2.jpg",
+      "https://example.com/images/room-3.jpg",
+      "https://example.com/images/room-4.jpg",
+      "https://example.com/images/room-5.jpg",
+      "https://example.com/images/room-6.jpg",
+      "https://example.com/images/room-7.jpg",
+      "https://example.com/images/room-8.jpg"
+    ],
+    "housingTypes": [
+      "apartment",
+      "house",
+      "room",
+      "hotel"
+    ],
+    "amenities": [
+      "Breakfast",
+      "Air conditioning",
+      "Laptop friendly workspace",
+      "Baby seat",
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "users": [
+      {
+        "name": "Анна Смирнова",
+        "email": "anna@example.com",
+        "avatar": "https://example.com/avatars/anna.png",
+        "password": "secret123",
+        "type": "pro"
+      },
+      {
+        "name": "Марк Браун",
+        "email": "mark@example.com",
+        "avatar": "https://example.com/avatars/mark.jpg",
+        "password": "password12",
+        "type": "обычный"
+      },
+      {
+        "name": "Елена Волкова",
+        "email": "elena@example.com",
+        "avatar": "https://example.com/avatars/elena.png",
+        "password": "travel77",
+        "type": "pro"
+      },
+      {
+        "name": "Павел Орлов",
+        "email": "pavel@example.com",
+        "avatar": "https://example.com/avatars/pavel.jpg",
+        "password": "welcome8",
+        "type": "обычный"
+      },
+      {
+        "name": "Ирина Белова",
+        "email": "irina@example.com",
+        "avatar": "https://example.com/avatars/irina.png",
+        "password": "citytrip",
+        "type": "pro"
+      },
+      {
+        "name": "Олег Крылов",
+        "email": "oleg@example.com",
+        "avatar": "https://example.com/avatars/oleg.jpg",
+        "password": "holiday9",
+        "type": "обычный"
+      }
+    ]
+  }
+}
