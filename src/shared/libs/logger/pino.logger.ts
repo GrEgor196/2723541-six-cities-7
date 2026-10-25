@@ -21,7 +21,7 @@ export class PinoLogger implements Logger {
           level: 'debug'
         },
         {
-          target: 'pino-file',
+          target: 'pino/file',
           level: 'info',
           options: {}
         }
