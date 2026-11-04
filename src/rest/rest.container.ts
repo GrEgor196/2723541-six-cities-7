@@ -1,5 +1,7 @@
 import { Container } from 'inversify';
 import { Config, RestConfig, RestSchema } from '../shared/libs/config/index.js';
+import { DatabaseClient } from '../shared/libs/database-client/index.js';
+import { MongoDatabaseClient } from '../shared/libs/database-client/mongo.database-client.js';
 import { Logger, PinoLogger } from '../shared/libs/logger/index.js';
 import { Component } from '../shared/types/index.js';
 import { RestApplication } from './rest.application.js';
@@ -15,6 +17,9 @@ export function createRestContainer(): Container {
     .inSingletonScope();
   container.bind<Config<RestSchema>>(Component.Config)
     .to(RestConfig)
+    .inSingletonScope();
+  container.bind<DatabaseClient>(Component.DatabaseClient)
+    .to(MongoDatabaseClient)
     .inSingletonScope();
 
   return container;
